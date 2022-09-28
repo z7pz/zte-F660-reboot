@@ -1,9 +1,10 @@
 import puppeteer from "puppeteer";
-let ip = "10.25.168.50";
+import config from "../config.json" assert { type: "json" };
+
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto("http://" + ip);
+  await page.goto("http://" + config.ip);
 
   await page.evaluate(() => {
     document.getElementById("Frm_Username")!.setAttribute("value", "admin");
@@ -11,7 +12,7 @@ let ip = "10.25.168.50";
   });
 
   await page.click('input[type="submit"]');
-  await page.goto(`http://${ip}/start.ghtml`);
+  await page.goto(`http://${config.ip}/start.ghtml`);
   await page.evaluate(() => {
     document.body
       .getElementsByTagName("div")[0]
@@ -23,7 +24,7 @@ let ip = "10.25.168.50";
       .contentDocument!.getElementById("Fnt_mmManager")!
       .click();
   });
-  await page.goto(`http://${ip}/start.ghtml`);
+  await page.goto(`http://${config.ip}/start.ghtml`);
   await page.evaluate(() => {
     document.body
       .getElementsByTagName("div")[0]
@@ -36,7 +37,7 @@ let ip = "10.25.168.50";
       //@ts-ignore
       .click();
   });
-  await page.goto(`http://${ip}/start.ghtml`);
+  await page.goto(`http://${config.ip}/start.ghtml`);
   await page.evaluate(() => {
     const my = document.body
       .getElementsByTagName("div")[0]
